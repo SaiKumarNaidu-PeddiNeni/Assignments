@@ -1,6 +1,6 @@
 
 /**
- *    printing the bank dtails and type.
+ *    printing the bank details and type.
  */
 package card;
 

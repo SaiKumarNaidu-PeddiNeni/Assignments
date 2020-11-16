@@ -1,6 +1,6 @@
 package areaofashape;
 
-/*Finding the area of a shape*/
+/*Finding the area of a specified shape*/
 import java.util.Scanner;
 
 public class Main {
