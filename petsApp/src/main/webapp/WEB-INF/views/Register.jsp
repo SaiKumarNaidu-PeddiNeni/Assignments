@@ -6,7 +6,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Login Page</title>
+<title>Register Page</title>
+
+<script>
+	function matchPassword() {
+		var password = document.getElementById("password").value;
+		var CPassword = document.getElementById("confirm Password").value;
+		if (password != CPassword) {
+			alert("Passwords did not match");
+			return false;
+		} else {
+			alert("Password created successfully");
+			return true;
+		}
+	}
+</script>
+
 </head>
 <body>
 
@@ -19,24 +34,33 @@
 }
 </style>
 
-			<label for="username" class="field">Enter the userName:<span
+			<label for="username" class="field">Enter the User Name:<span
 				class="mandatory">*</span>
 			</label>
-			
+
 			<form:input path="userName" />
 			<br>
-			
-			<label for="password" class="field">Enter the password:<span
+
+			<label for="password" class="field">Enter the Password:<span
 				class="mandatory">*</span>
 			</label>
-			
-			<form:password path="password" />
-			<form:errors path="password" cssClass="error"></form:errors>
+
+			<form:password path="password" name="password"/>
+			<form:errors path="password"  cssClass="error"></form:errors>
 			<br>
-			
-			<input type="submit" id="button1" value="Register">
-			
-			<input type ="reset" id="button1" value="reset">
+
+			<label for="password" class="field">confirm Password:<span
+				class="mandatory">*</span>
+			</label>
+
+			<form:password path="password" name="confirm_password"/>
+			<form:errors path="password"  cssClass="error"></form:errors>
+			<br>
+
+			<input type="submit" onclick="return matchPassword()" id="button1"
+				value="Register">
+
+			<input type="reset" id="button1" value="reset">
 
 		</form:form>
 
