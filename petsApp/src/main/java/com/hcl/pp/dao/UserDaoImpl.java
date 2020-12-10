@@ -1,8 +1,9 @@
 package com.hcl.pp.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,7 +25,6 @@ public class UserDaoImpl implements UserDao {
 	private SessionFactory sessionFactory;
 
 	@Override
-	@Transactional
 	public User addUser(User user) throws AppException {
 		System.out.println("in the dao layer");
 		Session session = sessionFactory.getCurrentSession();
@@ -33,7 +33,6 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	@Transactional
 	public User findByUserName(User user) throws AppException {
 
 		
@@ -59,7 +58,6 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	@Transactional
 	public User remove(User user) throws AppException {
 
 		String hql = "SELECT userId FROM User user WHERE user.userName=:userName and user.password=:password";
@@ -84,7 +82,40 @@ public class UserDaoImpl implements UserDao {
 	 */
 	@Override
 	public List<Pet> getMyPets(User user) throws AppException {
-		return null;
+		
+		String hql = "SELECT userId FROM User user WHERE user.userName=:userName and user.password=:password";
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(hql);
+		query.setString("userName", user.getUserName());
+		query.setString("password", user.getPassword());
+		int userId = (int) query.uniqueResult();
+		
+		
+		user.setUserId(userId);
+		String hql_Pet = "SELECT * FROM Pet pet WHERE owner_userId="+user.getUserId();
+		Query query_Pet = session.createQuery(hql_Pet);
+		query_Pet.setInteger(userId, user.getUserId());
+		List<Pet> pets = new ArrayList<Pet>();
+		pets = query.getResultList();	
+		return pets;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.hcl.pp.dao.UserDao#getAllUsers(com.hcl.pp.model.User)
+	 */
+	@Override
+	public List<User> getAllUsers() throws AppException {
+		
+		String nativeQuery= "SELECT * FROM USER";
+		Session session = sessionFactory.getCurrentSession();
+		List<User> userList  =  session.createNativeQuery(nativeQuery).addEntity(User.class).list();	
+		System.out.println("1");
+		for(User user : userList)
+		{
+			System.out.println("1");
+			System.out.println(user.getUserName());
+		}
+		return userList;
 	}
 
 }

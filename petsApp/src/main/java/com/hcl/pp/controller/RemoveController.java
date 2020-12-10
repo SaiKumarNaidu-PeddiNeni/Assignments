@@ -28,12 +28,11 @@ public class RemoveController {
 	private UserService userService;
 
 	@RequestMapping(value = "/remove")
-	public String login(HttpServletRequest request, HttpServletResponse response) throws AppException {
+	public String remove(HttpServletRequest request, HttpServletResponse response) throws AppException {
 
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		userService.removee(user);
-
-		return "failure";
+		return "Remove";
 	}
 }

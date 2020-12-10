@@ -13,9 +13,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 //import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "Pet", uniqueConstraints = { @UniqueConstraint(columnNames = "petId") })
@@ -27,17 +33,31 @@ public class Pet implements Serializable {
 	@Column(name = "PetId", unique = true, nullable = false)
 	private Integer petId;
 
-	@Column(name = "petName", unique = true, nullable = false, length = 100)
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+
+	@Column(name = "petName", unique = false, nullable = false, length = 25)
+	@Size(min=3, max=20)
+	@NotEmpty
 	private String petName;
 
-	@Column(name = "place", unique = false, nullable = false, length = 100)
+	@Column(name = "place", unique = false, nullable = false, length = 25)
+	@Size(min=3,max=20)
+	@NotEmpty
 	private String place;
 
-	@Column(name = "age", unique = false, nullable = false, length = 100)
+	@Column(name = "age", unique = false, nullable = false, length = 25)
+	@Max(99)
+	@Min(1)
 	private int age;
-/*
+
 	@ManyToOne
-	private User user;*/
+	private User owner;
 
 	public String getPlace() {
 		return place;

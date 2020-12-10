@@ -18,8 +18,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+//import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "User", uniqueConstraints = { @UniqueConstraint(columnNames = "userId"),
@@ -34,9 +37,13 @@ public class User implements Serializable {
 	private Integer userId;
 
 	@Column(name = "password", unique = false, nullable = false, length = 100)
+	@Size(min=5,max=20)
+	@NotEmpty
 	private String password;
 
 	@Column(name = "userName", unique = true, nullable = false, length = 100)
+	@Size(min=6,max=20)
+	@NotEmpty
 	private String userName;
 	
 	//@Transient private String Confirm_password;

@@ -30,13 +30,13 @@ public class RegistrationController {
 	
 	
 	@GetMapping(value = "/Register1")
-	public String beforeLogin(Model model) {
+	public String beforeRegister(Model model) {
 		model.addAttribute("user", new User());
 		return "Register";
 	}
 
 	@PostMapping(value = "/register")
-	public String login(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) throws AppException {
+	public String Register(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) throws AppException {
 		if (bindingResult.hasErrors()) {
 			return "Register";
 		} else {

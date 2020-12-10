@@ -9,8 +9,6 @@ import com.hcl.pp.model.User;
 
 public interface UserDao {
 	
-	
-	
 	public abstract User addUser(User user) throws AppException;
 	
 	public abstract User findByUserName(User user)throws AppException;
@@ -19,5 +17,6 @@ public interface UserDao {
 	
 	public abstract List<Pet> getMyPets(User user) throws AppException;
 	
+	public abstract List<User> getAllUsers() throws AppException;
 
 }

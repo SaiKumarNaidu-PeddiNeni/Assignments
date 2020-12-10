@@ -16,6 +16,8 @@ public interface UserService {
 	
 	public abstract List<Pet> getMyPets(User user) throws AppException;
 	
+	public abstract List<User> getAllUsers() throws AppException ;
+	
 
 
 }
