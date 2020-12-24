@@ -51,10 +51,25 @@ public class StudentDaoImpl implements StudentDao {
 	 * @see com.dao.StudentDao#deleteById(int)
 	 */
 	@Override
-	public Student deleteById(Student student) {
+	public Student deleteById(int id) {
+		Student student = new Student();
 		Session session = sessionFactory.getCurrentSession();
+		String hql= "FROM Student student WHERE student.id=:id";
+		Query query = session.createQuery(hql);
+		query.setParameter("id", id);
+		 student = (Student) query.uniqueResult();
 		session.delete(student);
 		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.dao.StudentDao#updateStudent(com.model.Student)
+	 */
+	@Override
+	public Student updateStudent(Student student) {
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(student);	
+		return student;
 	}
 
 }

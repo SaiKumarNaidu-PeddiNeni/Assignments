@@ -45,9 +45,18 @@ public class StudentServiceImpl implements StudentService {
 	 */
 	@Override
 	@Transactional
-	public Student deleteById(Student student) {
+	public Student deleteById(int id) {
 		
-		return studentDao.deleteById(student);
+		return studentDao.deleteById(id);
 	}
+
+	/* (non-Javadoc)
+	 * @see com.service.StudentService#updateStudent(com.model.Student)
+	 */
+	@Override
+	@Transactional
+	public Student updateStudent(Student student) {
+		
+		return studentDao.updateStudent(student);	}
 
 }

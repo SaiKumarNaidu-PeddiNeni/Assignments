@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,10 +45,15 @@ public class FirstController {
 		return studentService.saveStudent(student);
 	}
 	
-	@DeleteMapping(value="/deleteStudent")
-	public Student deleteStudent(@RequestBody Student student)
+	@DeleteMapping(value="/deleteStudent/{id}")
+	public Student deleteStudent(@PathVariable("id") int id)
 	{
-		return studentService.deleteById(student);
+		return studentService.deleteById(id);
+	}
+	@PutMapping(value="/updateStudent")
+	public Student updateStudent(@RequestBody Student student)
+	{
+		return studentService.updateStudent(student);
 	}
 	
 }

@@ -23,6 +23,12 @@ public interface StudentDao {
 	 * @param id
 	 * @return
 	 */
-	public abstract Student deleteById(Student student);
+	public abstract Student deleteById(int id);
+
+	/**
+	 * @param student
+	 * @return
+	 */
+	public abstract Student updateStudent(Student student);
 
 }
