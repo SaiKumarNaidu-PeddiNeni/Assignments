@@ -60,7 +60,7 @@ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 			</beans:props>
 		</beans:property>
 		<beans:property name="packagesToScan"
-			value="com.hcl.pp.model"></beans:property>
+			value="com.model"></beans:property>
 	</beans:bean>
 
 	<beans:bean id="transactionManager"
@@ -84,10 +84,12 @@ http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	</beans:bean>
 	<beans:bean
 		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-		<beans:property name="messageConverters"
-			ref="jsonMessageConverter" />
-		<beans:property name="messageConverters"
-			ref="xmlMessageConverter" />
+		<beans:property name="messageConverters">
+			<beans:list>
+				<beans:ref bean="jsonMessageConverter" />
+				<beans:ref bean="xmlMessageConverter" />
+			</beans:list>
+		</beans:property>
 	</beans:bean>
 	<tx:annotation-driven
 		transaction-manager="transactionManager" />
